@@ -14,6 +14,18 @@ Never Alone is an app designed to help people that are struggling with addiction
 
  
 
+
+## Wireframes & ERD
+
+---
+
+![Wireframe](./NeverAlone-Wireframe.jpg)
+![ERD](./ERD.png)
+
+
+
+
+
 ## Routes Inventory
 
 ---
