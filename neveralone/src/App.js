@@ -15,13 +15,19 @@ import MyCalendar from './pages/myCalendar'
 import MyPosts from './pages/myPosts'
 import MyEvents from './pages/myEvents'
 import MyJobs from './pages/myJobs'
+import AddNewPage from './pages/addNewPage'
+
 
 function App() {
-  const {userState, fetchUser, postState} = useContext(UserContext)
+  const {userState, fetchUser, postState, shouldRedirectState, redirectState} = useContext(UserContext)
   const [user,setUser] = userState
+  const [shouldRedirect, setShouldRedirect] = shouldRedirectState
+  const [redirectTo, setRedirectTo] = redirectState
   const [LogOrSignState, setLogOrSignState] = useState('')
+  const [addFormState, setAddFormState] = useState('')
 
   useEffect(()=>{fetchUser()},[])
+  useEffect(()=>{setShouldRedirect('false')},[])
 
   return (
     <div className="App">
@@ -46,9 +52,15 @@ function App() {
 
       <Route exact path= '/mycommunity' render= {() => <MyCommunity />} />  
       <Route exact path= '/mycalendar' render= {() => <MyCalendar />} />
-      <Route exact path= '/myposts' render= {() => <MyPosts />} />
-      <Route exact path= '/myevents' render= {() => <MyEvents />} />
-      <Route exact path= '/myjobs' render= {() => <MyJobs />} />
+      <Route exact path= '/myposts' render= {() => <MyPosts setAddFormState = {setAddFormState}/>} />
+      <Route exact path= '/myevents' render= {() => <MyEvents setAddFormState = {setAddFormState}/>} />
+      <Route exact path= '/myjobs' render= {() => <MyJobs setAddFormState = {setAddFormState} />} />
+      <Route exact path= '/addnew' render= {() => {
+        if(shouldRedirect === 'true'){
+          return <Redirect to= {`${redirectTo}`} />
+        }else{  
+          return <AddNewPage addFormState={addFormState} />} 
+      }} />
 
     
     </div>
