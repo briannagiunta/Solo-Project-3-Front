@@ -9,31 +9,33 @@ const LogOrSign = (props) =>{
     const [Name, setName] = useState('')
     const [Email, setEmail] = useState('')
     const [Password, setPassword] = useState('')
-    const [City, setCity] = useState('')
-    const [State, setState] = useState('')
     const [HereFor, setHereFor] = useState('')
-    const [ZipCode, setZipCode] = useState('')
-
-    const handleZip = async () => {
-        const res = await axios.get(`https://api.zip-codes.com/ZipCodesAPI.svc/1.0/QuickGetZipCodeDetails/${ZipCode}?key=${process.env.REACT_APP_ZIPKEY}`)
-        setCity(res.data.City)
-        setState(res.data.State)
-    }
-
+    const [Zipcode, setZipcode] = useState('')
+    // const [City, setCity] = useState('')
+    // const [State, setState] = useState('')
+    // const [signUp, setSignUp] = useState(false)
+    
+    // useEffect(()=>{setSignUp(false)},[])
+    
+    // const handleZip = async () => {
+    //     const res = await axios.get(`https://api.zip-codes.com/ZipCodesAPI.svc/1.0/QuickGetZipCodeDetails/${Zipcode}?key=${process.env.REACT_APP_ZIPKEY}`)
+    //     setCity(res.data.City)
+    //     setState(res.data.State)
+    //     setSignUp(true)
+    // }
+    
+    
     const handleSignUp = async () => {
-        await handleZip()
         const res = await axios.post(`${process.env.REACT_APP_BACKEND_URL}/users/signup`,{
-            Name, Email, Password, City, State, HereFor
+            Name, Email, Password, Zipcode, HereFor
         })
         console.log(res);
         if(res.data.message === 'Signed up'){
             localStorage.setItem('userId', res.data.user.id)
             setUser(res.data.user)
-        }
+        }   
     }
-
-
-
+    
     const handleLogin = async () => {
         const res = await axios.post(`${process.env.REACT_APP_BACKEND_URL}users/login`,{
             Name, Email, Password
@@ -44,6 +46,12 @@ const LogOrSign = (props) =>{
         }
     }
 
+
+    // if(signUp === true){
+    //     handleSignUp()
+    // }
+    
+
     return(
         <div>
             {props.LogOrSignState === 'signup' &&
@@ -52,7 +60,7 @@ const LogOrSign = (props) =>{
                     <input type = 'text' value={Name} onChange={(e) => { setName(e.target.value) }}/>
                     <LogSignForm Email = {Email} Password={Password} setEmail={setEmail} setPassword = {setPassword} />
                     <h4>Zip-Code:</h4>
-                    <input type = 'text' value={ZipCode} onChange={(e) => { setZipCode(e.target.value) }}/>
+                    <input type = 'text' value={Zipcode} onChange={(e) => { setZipcode(e.target.value) }}/>
                     <h4>I'm Here:</h4>
                     <select value={HereFor} onChange={(e) => { setHereFor(e.target.value) }}>
                         <option value=""></option>
