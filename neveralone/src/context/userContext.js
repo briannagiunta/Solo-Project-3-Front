@@ -14,14 +14,48 @@ const UserProvider = ({children}) => {
     const [allJobs, setAllJobs] = useState([])
     const [savedEvents, setSavedEvents] = useState([])
     const [savedJobs, setSavedJobs] = useState([])
+    const [usersFriends, setUsersFriends] = useState([])
+    const [friendRequests, setFriendRequests] = useState([])
+    const [pendingRequests, setPendingRequests] = useState([])
+    const [usersByZip, setUsersByZip] = useState([])
+
+    const fetchFriends = async () => {
+        const userId = localStorage.getItem('userId')
+        const res = await axios.get(`${process.env.REACT_APP_BACKEND_URL}/friendships/friends`,{
+            headers:{
+                Authorization: userId
+            }
+        })
+        setUsersFriends(res.data.acceptedFriends)
+    }
+
+    const fetchFriendRequests = async () =>{
+        const userId = localStorage.getItem('userId')
+        const res = await axios.get(`${process.env.REACT_APP_BACKEND_URL}/friendships/recieved/pending`,{
+            headers:{
+                Authorization: userId
+            }
+        })
+        setFriendRequests(res.data.requests)
+    }
+
+    const fetchPending = async () =>{
+        const userId = localStorage.getItem('userId')
+        const res = await axios.get(`${process.env.REACT_APP_BACKEND_URL}/friendships/sent/pending`,{
+            headers:{
+                Authorization: userId
+            }
+        })
+        setPendingRequests(res.data.requests)
+    }
 
 
 
     const fetchUser = async () => {
         let userId = localStorage.getItem('userId') 
         if(userId){
-            const res = await axios.get(`${process.env.REACT_APP_BACKEND_URL}/users/verify`,{
-                headers: {
+            const res = await axios.get(`${process.env.REACT_APP_BACKEND_URL}/users/verify`, {
+                headers:{
                     Authorization: userId
                 }
             })
@@ -33,6 +67,16 @@ const UserProvider = ({children}) => {
         const res = await axios.get(`${process.env.REACT_APP_BACKEND_URL}/users/all`)
         setAllUsers(res.data.allUsers)
     }
+
+    const fetchByZip = async () =>{
+        console.log(user.zip);
+        const res = await axios.post(`${process.env.REACT_APP_BACKEND_URL}/users/zip`,{
+            zip: user.zip
+        })
+        console.log(res);
+        setUsersByZip(res.data.users)
+    }
+
     
     const fetchPosts = async () =>{
         const res = await axios.get(`${process.env.REACT_APP_BACKEND_URL}/posts/all`)
@@ -59,10 +103,8 @@ const UserProvider = ({children}) => {
         let arr = []
         res.data.events.forEach(async(event)=>{
             let response = await axios.get(`${process.env.REACT_APP_BACKEND_URL}/events/${event.eventId}`)
-            // console.log(response.data.event);
             arr.push(response.data.event)
         })
-        // console.log(arr)
         setSavedEvents(arr)
     }
 
@@ -76,12 +118,12 @@ const UserProvider = ({children}) => {
         let arr = []
         res.data.jobs.forEach(async(job)=>{
             let response = await axios.get(`${process.env.REACT_APP_BACKEND_URL}/jobs/${job.jobId}`)
-            // console.log(response.data.job);
             arr.push(response.data.job)
         })
-        // console.log(arr)
         setSavedJobs(arr)
     }
+
+    
 
 
     const state = {
@@ -94,13 +136,21 @@ const UserProvider = ({children}) => {
         allJobsState: [allJobs, setAllJobs],
         savedEventsState: [savedEvents,setSavedEvents],
         savedJobsState: [savedJobs, setSavedJobs],
+        pendingRequestsState: [pendingRequests, setPendingRequests],
+        friendRequestsState: [friendRequests, setFriendRequests],
+        usersFriendsState: [usersFriends,setUsersFriends],
+        usersByZipState: [usersByZip, setUsersByZip],
         fetchUser: fetchUser,
         fetchPosts: fetchPosts,
         fetchAllUsers: fetchAllUsers,
         fetchAllEvents: fetchAllEvents,
         fetchAllJobs: fetchAllJobs,
         fetchSavedEvents: fetchSavedEvents,
-        fetchSavedJobs: fetchSavedJobs
+        fetchSavedJobs: fetchSavedJobs,
+        fetchPending: fetchPending,
+        fetchFriendRequests: fetchFriendRequests,
+        fetchFriends: fetchFriends,
+        fetchByZip: fetchByZip
         
     }
 

@@ -333,5 +333,11 @@ body{
   justify-content: space-evenly;
 }
 
+.pending{
+  font-style: italic;
+}
 
+a{
+  text-decoration: none;
+}
 

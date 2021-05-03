@@ -21,7 +21,7 @@ import JobInfo from './pages/jobInfo'
 
 
 function App() {
-  const {userState, fetchUser, postState, shouldRedirectState, redirectState, allEventsState, fetchAllEvents,allJobsState, fetchAllJobs, fetchSavedEvents, fetchSavedJobs} = useContext(UserContext)
+  const {userState, fetchUser, shouldRedirectState, redirectState, allEventsState, allJobsState} = useContext(UserContext)
   const [user,setUser] = userState
   const [allEvents, setAllEvents] = allEventsState
   const [allJobs, setAllJobs] = allJobsState
@@ -32,12 +32,7 @@ function App() {
 
   useEffect(()=>{fetchUser()},[])
   useEffect(()=>{setShouldRedirect('false')},[])
-  // useEffect(()=>{fetchAllEvents()},[])
-  // useEffect(()=>{fetchAllJobs()},[])
-  // useEffect(()=>{fetchSavedEvents()},[])
-  // useEffect(()=>{fetchSavedJobs()},[])
-
-
+  
   return (
     <div className="App">
     
@@ -80,9 +75,6 @@ function App() {
       }}/>
 
       
-
-
-
 
 
       <Route exact path= '/mycommunity' render= {() => <MyCommunity />} />  

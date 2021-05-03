@@ -4,8 +4,9 @@ import {Link} from 'react-router-dom'
 import LinkButton from '../components/linkButton'
 
 const UserContainer = () =>{
-    const {userState} = useContext(UserContext)
+    const {userState, friendRequestsState} = useContext(UserContext)
     const [user,setUser] = userState
+    const [friendRequests, setFriendRequests] = friendRequestsState
 
 
     return(
@@ -17,13 +18,32 @@ const UserContainer = () =>{
                 <h4> {user.name} </h4>
                 <div> Im Here {user.hereFor} </div>
             </div>
-            <div className = 'user-nav'>
-                <LinkButton path='/mycommunity' text= 'My Community' class = 'user-link' />
-                <LinkButton path='/mycalendar' text= 'Saved Jobs/Events' class = 'user-link' />
-                <LinkButton path='/myposts' text= 'My Posts' class = 'user-link' />
-                <LinkButton path='/myevents' text= 'My Events' class = 'user-link' />
-                <LinkButton path='/myjobs' text= 'My Job Listings' class = 'user-link' />
-            </div>
+                {friendRequests.length > 0 ? 
+                    <div className = 'user-nav'>
+                        <LinkButton path='/mycommunity' text= {`My Friends | ${friendRequests.length} new!`} class = 'user-link' />
+                        <LinkButton path='/mycalendar' text= 'Saved Jobs/Events' class = 'user-link' />
+                        <LinkButton path='/myposts' text= 'My Posts' class = 'user-link' />
+                        <LinkButton path='/myevents' text= 'My Events' class = 'user-link' />
+                        <LinkButton path='/myjobs' text= 'My Job Listings' class = 'user-link' />
+                    </div>
+
+                :
+
+                    <div className = 'user-nav'>
+                        <LinkButton path='/mycommunity' text= 'My Friends' class = 'user-link' />
+                        <LinkButton path='/mycalendar' text= 'Saved Jobs/Events' class = 'user-link' />
+                        <LinkButton path='/myposts' text= 'My Posts' class = 'user-link' />
+                        <LinkButton path='/myevents' text= 'My Events' class = 'user-link' />
+                        <LinkButton path='/myjobs' text= 'My Job Listings' class = 'user-link' />
+                    </div>
+
+
+                
+            
+                }
+
+
+            
         </div>
     )
 }
