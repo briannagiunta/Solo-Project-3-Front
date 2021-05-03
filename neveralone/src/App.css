@@ -79,6 +79,7 @@ body{
   border: 1px solid red;
   width: 80%;
   height: 100%;
+  /* height: fit-content; */
   padding: 5px;
   margin: 5px;
   display: flex;
@@ -200,8 +201,6 @@ body{
 
 .event-job-list{
   width: 80%;
-  height: 90%;
-  border: 1px solid black;
   margin: 5px;
   display: flex;
   flex-direction: column;
@@ -221,3 +220,118 @@ body{
   justify-content: space-evenly;
   width: 100%;
 }
+
+.info-container{
+  width: 50%;
+  height: 50%;
+  border: 1px solid black;
+  margin: 5px;
+  padding: 10px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.info-description{
+  height: 30%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.saved-container{
+  width: 100%;
+  height: 80%;
+  display: flex;
+}
+
+
+.saved{
+  width: 50%;
+  height: 100%;
+  border: 1px solid black;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.header{
+  width: 100%;
+  display: flex;
+  /* align-items: center; */
+  justify-content: center;
+}
+.home-header{
+  display:flex;
+  width: 95%;
+  justify-content: space-between;
+}
+
+.home-title{
+  font-weight: bold;
+  font-size: 200%;
+}
+.home-nav{
+  display: flex;
+  width: 15%;
+  align-items: flex-end;
+  justify-content: space-between;
+  font-size: large;
+}
+
+.home-page{
+  height: 90%;
+  width: 100%;
+  padding: 5px;
+  border: 1px solid black;
+  background-image:
+   linear-gradient(
+    rgba(0, 0, 0, 0.3),
+    rgba(0, 0, 0, 0.3)
+  ), 
+  url('./together2.jpg');
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.home-container{
+  width: 70%;
+  /* height: 60%; */
+  background: rgba(0, 0, 0, 0.5);
+  backdrop-filter: blur(4px);
+  box-shadow: 0 1px 6px rgb(0 0 0 / 80%), 0 1px 4px rgb(0 0 0 / 80%);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: space-between;
+  color:white;
+  padding: 0 20px 30px 20px;
+}
+.about {
+  width: 95%;
+  font-size: larger;
+  font-weight: bold;
+  text-align: center;
+}
+
+.signup-form{
+  display: flex;
+  flex-direction: column;
+  width: 50%;
+  align-items: center;
+}
+
+.form-section{
+  display: flex;
+  width: 100%;
+  align-items: center;
+  justify-content: space-evenly;
+}
+
+
+

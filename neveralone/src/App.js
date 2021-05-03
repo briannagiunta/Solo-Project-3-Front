@@ -16,11 +16,15 @@ import MyPosts from './pages/myPosts'
 import MyEvents from './pages/myEvents'
 import MyJobs from './pages/myJobs'
 import AddNewPage from './pages/addNewPage'
+import EventInfo from './pages/eventInfo'
+import JobInfo from './pages/jobInfo'
 
 
 function App() {
-  const {userState, fetchUser, postState, shouldRedirectState, redirectState} = useContext(UserContext)
+  const {userState, fetchUser, postState, shouldRedirectState, redirectState, allEventsState, fetchAllEvents,allJobsState, fetchAllJobs, fetchSavedEvents, fetchSavedJobs} = useContext(UserContext)
   const [user,setUser] = userState
+  const [allEvents, setAllEvents] = allEventsState
+  const [allJobs, setAllJobs] = allJobsState
   const [shouldRedirect, setShouldRedirect] = shouldRedirectState
   const [redirectTo, setRedirectTo] = redirectState
   const [LogOrSignState, setLogOrSignState] = useState('')
@@ -28,6 +32,11 @@ function App() {
 
   useEffect(()=>{fetchUser()},[])
   useEffect(()=>{setShouldRedirect('false')},[])
+  // useEffect(()=>{fetchAllEvents()},[])
+  // useEffect(()=>{fetchAllJobs()},[])
+  // useEffect(()=>{fetchSavedEvents()},[])
+  // useEffect(()=>{fetchSavedJobs()},[])
+
 
   return (
     <div className="App">
@@ -49,6 +58,32 @@ function App() {
       <Route exact path= '/resources' render= {() => <Resources />} />
       <Route exact path= '/events' render= {() => <Events />} />
       <Route exact path= '/jobs' render= {() => <Jobs />} />
+
+      <Route exact path= '/events/:id' render={(props) => {
+        const event = allEvents.find(event => event.id.toString() === props.match.params.id)
+        props = {...props, ...event}
+        if(shouldRedirect === 'true'){
+          return <Redirect to= {`${redirectTo}`} />
+        }else{
+          return <EventInfo {...props} />
+        }
+      }}/>
+
+      <Route exact path= '/jobs/:id' render={(props) => {
+        const job = allJobs.find(job => job.id.toString() === props.match.params.id)
+        props = {...props, ...job}
+        if(shouldRedirect === 'true'){
+          return <Redirect to= {`${redirectTo}`} />
+        }else{
+          return <JobInfo {...props} />
+        }
+      }}/>
+
+      
+
+
+
+
 
       <Route exact path= '/mycommunity' render= {() => <MyCommunity />} />  
       <Route exact path= '/mycalendar' render= {() => <MyCalendar />} />

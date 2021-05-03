@@ -7,17 +7,21 @@ const NavBar = (props) =>{
     const [user,setUser] = userState
 
     return(
-        <nav>
+        <nav className = 'header'>
             {!user.name ?
-                <div>
-                    <Link to= '/'>Home</Link>{"  |  "}
+                <div className = 'home-header'>
+                    <div className = 'home-title'>Never Alone</div>
+                    <div className = 'home-nav'>
+                    <Link to= '/'>About</Link>
+
                     <span onClick={()=>{props.setLogOrSignState('signup')}}>
-                        <Link to= '/log-sign'>Sign Up</Link>{"  |  "}
+                        <Link to= '/log-sign'>Join Us</Link>
                     </span>
 
                     <span onClick={()=>{props.setLogOrSignState('login')}}>
                         <Link to='/log-sign'>Login</Link>
                     </span>
+                    </div>
                 </div>
             :   
                 <div>

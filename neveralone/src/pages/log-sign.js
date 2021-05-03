@@ -1,8 +1,8 @@
 import axios from 'axios'
 import LogSignForm from '../components/log-signForm'
+import SignForm from '../components/signForm'
 import {UserContext} from '../context/userContext'
 import {useContext,useEffect,useState} from 'react'
-
 const LogOrSign = (props) =>{
     const {userState} = useContext(UserContext)
     const [user,setUser] = userState
@@ -53,29 +53,34 @@ const LogOrSign = (props) =>{
     
 
     return(
-        <div>
+        <div className = 'home-page'>
             {props.LogOrSignState === 'signup' &&
-                <div>
-                    <h4>Name:</h4>
-                    <input type = 'text' value={Name} onChange={(e) => { setName(e.target.value) }}/>
-                    <LogSignForm Email = {Email} Password={Password} setEmail={setEmail} setPassword = {setPassword} />
-                    <h4>Zip-Code:</h4>
-                    <input type = 'text' value={Zipcode} onChange={(e) => { setZipcode(e.target.value) }}/>
-                    <h4>I'm Here:</h4>
-                    <select value={HereFor} onChange={(e) => { setHereFor(e.target.value) }}>
-                        <option value=""></option>
-                        <option value="for help">For Help</option>
-                        <option value="to help">To Help</option>
-                    </select>
-                   <div>
-                        <button onClick={()=>{handleSignUp()}} >Sign Up</button>
-                   </div>
+                <div className = 'home-container'>
+                    <div className = 'signup-form'>
+                        <div className = "form-section">
+                            <SignForm Name = {Name} setName={setName} Zipcode={Zipcode} setZipcode={setZipcode}  />
+                            <LogSignForm Email = {Email} Password={Password} setEmail={setEmail} setPassword = {setPassword} />
+                        </div>
+                    
+                        <h4>I'm Here:</h4>
+                        <select value={HereFor} onChange={(e) => { setHereFor(e.target.value) }}>
+                            <option value=""></option>
+                            <option value="for help">For Help</option>
+                            <option value="to help">To Help</option>
+                        </select><br/>
+
+
+                        <div>
+                            <button onClick={()=>{handleSignUp()}} >Sign Up</button>
+                        </div>
+
+                   </div>    
                 </div>
             } 
 
             {props.LogOrSignState === 'login' &&
-                <div>
-                    <LogSignForm Email = {Email} Password={Password} setEmail={setEmail} setPassword = {setPassword} />
+                <div className = 'home-container'>
+                    <LogSignForm Email = {Email} Password={Password} setEmail={setEmail} setPassword = {setPassword} /><br/>
                     <button onClick={()=>{handleLogin()}}>Login</button>
                 </div>
             }
