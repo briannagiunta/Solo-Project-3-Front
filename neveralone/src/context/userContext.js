@@ -1,4 +1,4 @@
-import {useState, createContext } from 'react'
+import {useState, createContext, useEffect} from 'react'
 import axios from 'axios'
 
 
@@ -18,6 +18,38 @@ const UserProvider = ({children}) => {
     const [friendRequests, setFriendRequests] = useState([])
     const [pendingRequests, setPendingRequests] = useState([])
     const [usersByZip, setUsersByZip] = useState([])
+    const [userConvos,setUserConvos] = useState([])
+    const [hasConvoWith, setHasConvoWith] = useState([])
+    const [currentConvo, setCurrentConvo] = useState(0)
+    const [convoName, setConvoName] = useState('')
+
+
+    const getConvos = async () => {
+        const userId = localStorage.getItem('userId')
+        const res = await axios.get(`${process.env.REACT_APP_BACKEND_URL}/convos/getconvos`,{
+            headers:{
+                Authorization: userId
+            }
+        })
+        setUserConvos(res.data.convos)
+        fetchConvoUsers()
+    }
+
+    const fetchConvoUsers = async () => {
+        let arr = []
+        userConvos.forEach(async(convo)=>{
+            const res = await axios.post(`${process.env.REACT_APP_BACKEND_URL}/convos/users`,{
+                id: convo.id
+            })
+            res.data.users.forEach((u)=>{
+                if(u.email !== user.email){
+                    arr.push( { id: convo.id, usernames: convo.usernames , createdAt: convo.createdAt , updatedAt: convo.updatedAt, user: u } )
+                }
+            })
+        })
+        setHasConvoWith(arr)
+    }
+  
 
     const fetchFriends = async () => {
         const userId = localStorage.getItem('userId')
@@ -62,6 +94,7 @@ const UserProvider = ({children}) => {
             setUser(res.data.user)
         }
     }
+    // useEffect(()=>{fetchUser()},[])
 
     const fetchAllUsers = async () =>{
         const res = await axios.get(`${process.env.REACT_APP_BACKEND_URL}/users/all`)
@@ -74,7 +107,7 @@ const UserProvider = ({children}) => {
         })
         setUsersByZip(res.data.users)
     }
-
+    // useEffect(()=>{fetchByZip()},[])
     
     const fetchPosts = async () =>{
         const res = await axios.get(`${process.env.REACT_APP_BACKEND_URL}/posts/all`)
@@ -138,6 +171,10 @@ const UserProvider = ({children}) => {
         friendRequestsState: [friendRequests, setFriendRequests],
         usersFriendsState: [usersFriends,setUsersFriends],
         usersByZipState: [usersByZip, setUsersByZip],
+        userConvosState: [userConvos, setUserConvos],
+        currentConvoState: [currentConvo, setCurrentConvo],
+        convoNameState: [convoName, setConvoName],
+        hasConvoWithState: [hasConvoWith, setHasConvoWith],
         fetchUser: fetchUser,
         fetchPosts: fetchPosts,
         fetchAllUsers: fetchAllUsers,
@@ -148,7 +185,8 @@ const UserProvider = ({children}) => {
         fetchPending: fetchPending,
         fetchFriendRequests: fetchFriendRequests,
         fetchFriends: fetchFriends,
-        fetchByZip: fetchByZip
+        fetchByZip: fetchByZip,
+        getConvos: getConvos
         
     }
 

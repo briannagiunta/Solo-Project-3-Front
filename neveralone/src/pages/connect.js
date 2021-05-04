@@ -38,8 +38,6 @@ const Connect = (props) =>{
                             return (<User key = {user.id} id = {user.id} name = {user.name} hereFor = {user.hereFor} view = 'connect' />)
                         }
                     })}
-
-
                 </div> 
                 
 

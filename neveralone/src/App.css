@@ -79,12 +79,12 @@ body{
   border: 1px solid red;
   width: 80%;
   height: 100%;
-  /* height: fit-content; */
   padding: 5px;
   margin: 5px;
   display: flex;
   flex-direction: column;
   align-items: center;
+  overflow-y: scroll;
 }
 
 .post-container{
@@ -363,30 +363,52 @@ a{
   justify-content: center;
 }
 
-#content{
+.content{
   height:30%;
   width:50%;
 }
 
-.message-page{
-  border: 
-  1px solid black;
+.convo-page{
   width: 100%;
-  height: 100%;
+  height: 80%;
   display:flex;
+  padding:5px;
+  justify-content: space-evenly;
 }
 
-.message-list{
+.convo-list{
   border: 
   1px solid black;
-  width: 30%;
-  height: 100%;
+  width: 25%;
+  height: 98%;
   display: flex;
   flex-direction: column;
+  padding:5px;
 }
-.current-message{
+.current-convo{
   border: 
   1px solid black;
-  width: 70%;
-  height: 100%;
+  width: 65%;
+  height: 98%;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  align-items: center;
+  padding:5px;
+}
+
+.messages{
+  height:90%;
+  width:70%;
+  overflow-y: scroll;
+  border: 1px solid orange;
+}
+/* .size{
+  height: 10%;
+  width: 100%;
+} */
+.respond{
+  height:10%;
+  width:70%;
+  position: sticky;
 }

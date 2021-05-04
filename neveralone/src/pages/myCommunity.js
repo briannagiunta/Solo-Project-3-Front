@@ -22,7 +22,7 @@ const MyCommunity = (props) =>{
             <UserContainer />
 
             <div className = 'content-container'>
-                <h1>My Community</h1>
+                <h1>Friends</h1>
                 <select value={view} onChange={(e) => { setView(e.target.value) }}>
                     <option value="My Friends">My Friends</option>
                     <option value="Friend Requests">Friend Requests</option>

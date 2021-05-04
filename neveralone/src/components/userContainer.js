@@ -31,7 +31,7 @@ const UserContainer = () =>{
                 :
 
                     <div className = 'user-nav'>
-                        <LinkButton path='/mycommunity' text= 'My Friends' class = 'user-link' />
+                        <LinkButton path='/mycommunity' text= 'Friends' class = 'user-link' />
                         <LinkButton path='/messages' text= 'Messages' class = 'user-link' />
                         <LinkButton path='/mycalendar' text= 'Saved Jobs/Events' class = 'user-link' />
                         <LinkButton path='/myposts' text= 'My Posts' class = 'user-link' />

@@ -6,7 +6,7 @@ import axios from 'axios'
 
 const JobInfo = (props) => {
     // console.log(props)
-    const {shouldRedirectState, redirectState} = useContext(UserContext)
+    const {shouldRedirectState, redirectState, fetchSavedJobs} = useContext(UserContext)
 
     const [shouldRedirect, setShouldRedirect] = shouldRedirectState
     const [redirectTo, setRedirectTo] = redirectState
@@ -24,6 +24,7 @@ const JobInfo = (props) => {
         })
         console.log(res);
         setRedirectTo('/mycalendar')
+        // await fetchSavedJobs()
         if(res.data.message === 'job saved'){
             setShouldRedirect('true')
         }

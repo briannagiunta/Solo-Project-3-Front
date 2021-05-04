@@ -7,8 +7,7 @@ import MidForm from '../components/midForm'
 import EndForm from '../components/endForm'
 
 const AddNewPage = (props) =>{
-    const {userState, postState, shouldRedirectState, redirectState} = useContext(UserContext)
-    const [user,setUser] = userState
+    const {shouldRedirectState, redirectState} = useContext(UserContext)
     const [shouldRedirect, setShouldRedirect] = shouldRedirectState
     const [redirectTo, setRedirectTo] = redirectState
     const [Title, setTitle] = useState('')
@@ -19,28 +18,12 @@ const AddNewPage = (props) =>{
     const [End, setEnd] = useState('')
     const [Address, setAddress] = useState('')
     const [Zipcode, setZipcode] = useState('')
-    // const [City, setCity] = useState('')
-    // const [State, setState] = useState('')
-    // const [Added, setAdded] = useState('')
+  
     
     
     
     useEffect(()=>{setShouldRedirect('false')},[])
-    // useEffect(()=>{setAdded('')},[])
-    
-    // const handleZip = async () => {
-    //     const res = await axios.get(`https://api.zip-codes.com/ZipCodesAPI.svc/1.0/QuickGetZipCodeDetails/${Zipcode}?key=${process.env.REACT_APP_ZIPKEY}`)
-    //     console.log(res);
-    //     setCity(res.data.City)
-    //     setState(res.data.State) 
-    //     if(props.addFormState === 'Add New Job Listing'){
-    //         setAdded('job')
-    //     }else if(props.addFormState === 'Add New Event'){
-    //         setAdded('event')
-    //     }
-        
-    // }
-
+ 
     const addPost = async () => {
         const userId = localStorage.getItem('userId')
         const res = await axios.post(`${process.env.REACT_APP_BACKEND_URL}/posts/create`, {
@@ -51,7 +34,6 @@ const AddNewPage = (props) =>{
                 Authorization: userId
             }
         })
-        console.log(res);
         setRedirectTo('/myposts')
         if(res.data.message === "post added"){
             setShouldRedirect('true')
@@ -91,14 +73,6 @@ const AddNewPage = (props) =>{
             setShouldRedirect('true')
         }
     }
-        
-
-    // if(Added === 'job'){
-    //     addJob()
-    // }else if(Added === 'event'){
-    //     addEvent()
-    // }
-
     
     return(
         <div className = 'page-container'>

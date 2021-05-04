@@ -4,10 +4,25 @@ import {UserContext} from '../context/userContext'
 import { Link } from 'react-router-dom'
 
 const User = (props) => {
-    const {fetchFriends, fetchPending, fetchFriendRequests } = useContext(UserContext)
+    const {fetchPending, fetchFriendRequests, shouldRedirectState, hasConvoWithState} = useContext(UserContext)
     const [view, setView] = useState('')
+    const [shouldRedirect, setShouldRedirect] = shouldRedirectState
+    const [hasConvoWith, setHasConvoWith] = hasConvoWithState
+    const [linkTo, setLinkTo] = useState('')
 
-    useEffect(()=>{setView(props.view)})
+
+    const checkForConvo = () =>{
+        hasConvoWith.forEach((convo)=>{
+            if(props.id === convo.user.id){
+                setLinkTo(`/messages`)
+            }else{
+                setLinkTo(`/startconvo/${props.id}`)
+            }
+        })
+    }
+    useEffect(()=>{checkForConvo()},[])
+    useEffect(()=>{setView(props.view)},[])
+    useEffect(()=>{setShouldRedirect('false')},[])
 
 
     const sendRequest = async () =>{
@@ -54,27 +69,29 @@ const User = (props) => {
 
                 {view === 'connect' && 
                     <div className='userButtons'>
-                        <button><Link to= {`/startconvo/${props.id}`}>Message</Link></button>
+                        {/* <button><Link to= {`/startconvo/${props.id}`}>Message</Link></button> */}
+                        <button><Link to= {linkTo}>Message</Link></button>
                         <button onClick = {()=>{sendRequest()}}>Add</button>
                     </div>
                 }
                 {view === 'friend' && 
                     <div className='userButtons'>
-                        <button><Link to= {`/startconvo/${props.id}`}>Message</Link></button>
-                        {/* <button>Message</button> */}
+                        <button><Link to= {linkTo}>Message</Link></button>
+                        {/* <button><Link to= {`/startconvo/${props.id}`}>Message</Link></button> */}
                         <button>Delete</button>
                     </div>
                 }
                 {view === 'pending' && 
                     <div className='userButtons'>
-                        <button><Link to= {`/startconvo/${props.id}`}>Message</Link></button>
-                        {/* <button>Message</button> */}
+                        <button><Link to= {linkTo}>Message</Link></button>
+                        {/* <button><Link to= {`/startconvo/${props.id}`}>Message</Link></button> */}
                         <button className = 'pending'>Pending</button>
                     </div>
                 }
                 {view === 'request' && 
                     <div className='userButtons'>
-                        <button><Link to= {`/startconvo/${props.id}`}>Message</Link></button>
+                        <button><Link to= {linkTo}>Message</Link></button>
+                        {/* <button><Link to= {`/startconvo/${props.id}`}>Message</Link></button> */}
                         {/* <button>Message</button> */}
                         <button onClick={()=>{acceptRequest()}}>Accept</button>
                         <button>Reject</button>

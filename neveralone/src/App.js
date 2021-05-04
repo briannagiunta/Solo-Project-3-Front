@@ -23,7 +23,7 @@ import SendMessage from './pages/sendMessage'
 
 
 function App() {
-  const {userState, fetchUser, shouldRedirectState, redirectState, allEventsState, allJobsState, allUsersState, fetchAllUsers} = useContext(UserContext)
+  const {userState, fetchUser, shouldRedirectState, redirectState, allEventsState, allJobsState, allUsersState, fetchAllUsers, fetchSavedJobs, fetchSavedEvents,fetchByZip} = useContext(UserContext)
   const [user,setUser] = userState
   const [allEvents, setAllEvents] = allEventsState
   const [allJobs, setAllJobs] = allJobsState
@@ -35,6 +35,9 @@ function App() {
 
   useEffect(()=>{fetchUser()},[])
   useEffect(()=>{fetchAllUsers()},[])
+  useEffect(()=>{fetchByZip()},[])
+  useEffect(()=>{fetchSavedJobs()},[])
+  useEffect(()=>{fetchSavedEvents()},[])
   useEffect(()=>{setShouldRedirect('false')},[])
   
   return (

@@ -6,12 +6,13 @@ import axios from 'axios'
 
 const EventInfo = (props) => {
     // console.log(props);
-    const {shouldRedirectState, redirectState} = useContext(UserContext)
+    const {shouldRedirectState, redirectState, fetchSavedEvents} = useContext(UserContext)
 
     const [shouldRedirect, setShouldRedirect] = shouldRedirectState
     const [redirectTo, setRedirectTo] = redirectState
 
     useEffect(()=>{setShouldRedirect('false')},[])
+    
 
 
     const saveEvent = async () => {
@@ -25,6 +26,7 @@ const EventInfo = (props) => {
         })
         console.log(res);
         setRedirectTo('/mycalendar')
+        // fetchSavedEvents()
         if(res.data.message === 'event saved'){
             setShouldRedirect('true')
         }
