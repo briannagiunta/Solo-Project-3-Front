@@ -16,19 +16,27 @@ import MyPosts from './pages/myPosts'
 import MyEvents from './pages/myEvents'
 import MyJobs from './pages/myJobs'
 import AddNewPage from './pages/addNewPage'
+import EventInfo from './pages/eventInfo'
+import JobInfo from './pages/jobInfo'
+import Messages from './pages/messages'
+import SendMessage from './pages/sendMessage'
 
 
 function App() {
-  const {userState, fetchUser, postState, shouldRedirectState, redirectState} = useContext(UserContext)
+  const {userState, fetchUser, shouldRedirectState, redirectState, allEventsState, allJobsState, allUsersState, fetchAllUsers} = useContext(UserContext)
   const [user,setUser] = userState
+  const [allEvents, setAllEvents] = allEventsState
+  const [allJobs, setAllJobs] = allJobsState
+  const [allUsers, setAllUsers] = allUsersState
   const [shouldRedirect, setShouldRedirect] = shouldRedirectState
   const [redirectTo, setRedirectTo] = redirectState
   const [LogOrSignState, setLogOrSignState] = useState('')
   const [addFormState, setAddFormState] = useState('')
 
   useEffect(()=>{fetchUser()},[])
+  useEffect(()=>{fetchAllUsers()},[])
   useEffect(()=>{setShouldRedirect('false')},[])
-
+  
   return (
     <div className="App">
     
@@ -50,7 +58,31 @@ function App() {
       <Route exact path= '/events' render= {() => <Events />} />
       <Route exact path= '/jobs' render= {() => <Jobs />} />
 
+      <Route exact path= '/events/:id' render={(props) => {
+        const event = allEvents.find(event => event.id.toString() === props.match.params.id)
+        props = {...props, ...event}
+        if(shouldRedirect === 'true'){
+          return <Redirect to= {`${redirectTo}`} />
+        }else{
+          return <EventInfo {...props} />
+        }
+      }}/>
+
+      <Route exact path= '/jobs/:id' render={(props) => {
+        const job = allJobs.find(job => job.id.toString() === props.match.params.id)
+        props = {...props, ...job}
+        if(shouldRedirect === 'true'){
+          return <Redirect to= {`${redirectTo}`} />
+        }else{
+          return <JobInfo {...props} />
+        }
+      }}/>
+
+      
+
+
       <Route exact path= '/mycommunity' render= {() => <MyCommunity />} />  
+      <Route exact path= '/messages' render= {() => <Messages />} /> 
       <Route exact path= '/mycalendar' render= {() => <MyCalendar />} />
       <Route exact path= '/myposts' render= {() => <MyPosts setAddFormState = {setAddFormState}/>} />
       <Route exact path= '/myevents' render= {() => <MyEvents setAddFormState = {setAddFormState}/>} />
@@ -62,6 +94,15 @@ function App() {
           return <AddNewPage addFormState={addFormState} />} 
       }} />
 
+      <Route exact path= '/startconvo/:id' render={(props) => {
+        const user = allUsers.find(user => user.id.toString() === props.match.params.id)
+        props = {...props, ...user}
+        if(shouldRedirect === 'true'){
+          return <Redirect to= {`${redirectTo}`} />
+        }else{
+          return <SendMessage {...props} />
+        }
+      }}/>
     
     </div>
   );
