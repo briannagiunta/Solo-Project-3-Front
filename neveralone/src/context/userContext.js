@@ -69,11 +69,9 @@ const UserProvider = ({children}) => {
     }
 
     const fetchByZip = async () =>{
-        console.log(user.zip);
         const res = await axios.post(`${process.env.REACT_APP_BACKEND_URL}/users/zip`,{
             zip: user.zip
         })
-        console.log(res);
         setUsersByZip(res.data.users)
     }
 

@@ -18,19 +18,23 @@ import MyJobs from './pages/myJobs'
 import AddNewPage from './pages/addNewPage'
 import EventInfo from './pages/eventInfo'
 import JobInfo from './pages/jobInfo'
+import Messages from './pages/messages'
+import SendMessage from './pages/sendMessage'
 
 
 function App() {
-  const {userState, fetchUser, shouldRedirectState, redirectState, allEventsState, allJobsState} = useContext(UserContext)
+  const {userState, fetchUser, shouldRedirectState, redirectState, allEventsState, allJobsState, allUsersState, fetchAllUsers} = useContext(UserContext)
   const [user,setUser] = userState
   const [allEvents, setAllEvents] = allEventsState
   const [allJobs, setAllJobs] = allJobsState
+  const [allUsers, setAllUsers] = allUsersState
   const [shouldRedirect, setShouldRedirect] = shouldRedirectState
   const [redirectTo, setRedirectTo] = redirectState
   const [LogOrSignState, setLogOrSignState] = useState('')
   const [addFormState, setAddFormState] = useState('')
 
   useEffect(()=>{fetchUser()},[])
+  useEffect(()=>{fetchAllUsers()},[])
   useEffect(()=>{setShouldRedirect('false')},[])
   
   return (
@@ -78,6 +82,7 @@ function App() {
 
 
       <Route exact path= '/mycommunity' render= {() => <MyCommunity />} />  
+      <Route exact path= '/messages' render= {() => <Messages />} /> 
       <Route exact path= '/mycalendar' render= {() => <MyCalendar />} />
       <Route exact path= '/myposts' render= {() => <MyPosts setAddFormState = {setAddFormState}/>} />
       <Route exact path= '/myevents' render= {() => <MyEvents setAddFormState = {setAddFormState}/>} />
@@ -89,6 +94,15 @@ function App() {
           return <AddNewPage addFormState={addFormState} />} 
       }} />
 
+      <Route exact path= '/startconvo/:id' render={(props) => {
+        const user = allUsers.find(user => user.id.toString() === props.match.params.id)
+        props = {...props, ...user}
+        if(shouldRedirect === 'true'){
+          return <Redirect to= {`${redirectTo}`} />
+        }else{
+          return <SendMessage {...props} />
+        }
+      }}/>
     
     </div>
   );

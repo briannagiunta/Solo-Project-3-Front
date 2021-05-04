@@ -1,6 +1,7 @@
 import axios from "axios";
 import {useContext, useEffect, useState } from "react";
 import {UserContext} from '../context/userContext'
+import { Link } from 'react-router-dom'
 
 const User = (props) => {
     const {fetchFriends, fetchPending, fetchFriendRequests } = useContext(UserContext)
@@ -53,25 +54,28 @@ const User = (props) => {
 
                 {view === 'connect' && 
                     <div className='userButtons'>
-                        <button>Message</button>
+                        <button><Link to= {`/startconvo/${props.id}`}>Message</Link></button>
                         <button onClick = {()=>{sendRequest()}}>Add</button>
                     </div>
                 }
                 {view === 'friend' && 
                     <div className='userButtons'>
-                        <button>Message</button>
+                        <button><Link to= {`/startconvo/${props.id}`}>Message</Link></button>
+                        {/* <button>Message</button> */}
                         <button>Delete</button>
                     </div>
                 }
                 {view === 'pending' && 
                     <div className='userButtons'>
-                        <button>Message</button>
+                        <button><Link to= {`/startconvo/${props.id}`}>Message</Link></button>
+                        {/* <button>Message</button> */}
                         <button className = 'pending'>Pending</button>
                     </div>
                 }
                 {view === 'request' && 
                     <div className='userButtons'>
-                        <button>Message</button>
+                        <button><Link to= {`/startconvo/${props.id}`}>Message</Link></button>
+                        {/* <button>Message</button> */}
                         <button onClick={()=>{acceptRequest()}}>Accept</button>
                         <button>Reject</button>
                     </div>
