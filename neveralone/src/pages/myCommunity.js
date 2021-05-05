@@ -31,7 +31,7 @@ const MyCommunity = (props) =>{
                 <div className = 'connect-container'> 
                     {view === 'My Friends' &&
                         usersFriends.map(req=>
-                            <User key = {req.friend.id} id = {req.friend.id} name = {req.friend.name} hereFor = {req.friend.hereFor} view = 'friend' />
+                            <User key = {req.user.id} id = {req.user.id} name = {req.user.name} hereFor = {req.user.hereFor} view = 'friend' />
                         )
                     }
 

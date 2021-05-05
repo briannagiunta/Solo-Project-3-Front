@@ -58,6 +58,7 @@ const UserProvider = ({children}) => {
                 Authorization: userId
             }
         })
+        // console.log(res.data);
         setUsersFriends(res.data.acceptedFriends)
     }
 
@@ -147,10 +148,13 @@ const UserProvider = ({children}) => {
             }
         })
         let arr = []
-        res.data.jobs.forEach(async(job)=>{
-            let response = await axios.get(`${process.env.REACT_APP_BACKEND_URL}/jobs/${job.jobId}`)
-            arr.push(response.data.job)
-        })
+        if(res.data.message === 'saved jobs'){
+            res.data.jobs.forEach(async(job)=>{
+                let response = await axios.get(`${process.env.REACT_APP_BACKEND_URL}/jobs/${job.jobId}`)
+                arr.push(response.data.job)
+            })
+
+        }
         setSavedJobs(arr)
     }
 

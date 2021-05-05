@@ -24,18 +24,20 @@ const NavBar = (props) =>{
                     </div>
                 </div>
             :   
-                <div>
-                    <Link to='/community'>Community</Link>{"  |  "}
-                    <Link to='/connect'>Connect</Link>{"  |  "}
-                    <Link to='/resources'>Resources</Link>{"  |  "}
-                    <Link to='/events'>Events</Link>{"  |  "}
-                    <Link to='/jobs'>Job Listings</Link>{"  |  "}
+                <div className = 'user-header'>
+                    <div className = 'user-title'>Never Alone</div>
+                    <div className = 'users-nav'>
+                    <Link to='/community'>Community</Link>
+                    <Link to='/connect'>Connect</Link>
+                    {/* <Link to='/resources'>Resources</Link>{" | "} */}
+                    <Link to='/events'>Events</Link>
+                    <Link to='/jobs'>Job Listings</Link>
                     <span onClick={()=>{
                         setUser({})
                         localStorage.removeItem('userId')
                     }}><Link to='/'>Logout</Link></span>
+                    </div>
                 </div>
-
 
             }
         </nav>

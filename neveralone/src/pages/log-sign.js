@@ -20,7 +20,9 @@ const LogOrSign = (props) =>{
         if(res.data.message === 'Signed up'){
             localStorage.setItem('userId', res.data.user.id)
             setUser(res.data.user)
-        }   
+        }else{
+            alert('Email already taken')
+        }
     }
     
     const handleLogin = async () => {
@@ -30,6 +32,8 @@ const LogOrSign = (props) =>{
         if(res.data.message === 'login successful'){
             localStorage.setItem('userId', res.data.user.id)
             setUser(res.data.user)
+        }else{
+            alert('Incorrect email or password')
         }
     }
 

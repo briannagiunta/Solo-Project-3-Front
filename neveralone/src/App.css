@@ -21,6 +21,7 @@ body{
   flex-direction: column;
   align-items: center;
   justify-content: center;
+  background-color: #f1f1f1 ;
 }
 
 .page-container{
@@ -31,7 +32,6 @@ body{
 }
 
 .user-container{
-  border: 1px solid purple;
   width: 20%;
   height: 100%;
   display: flex;
@@ -40,6 +40,8 @@ body{
   justify-content: space-between;
   padding: 5px;
   margin: 5px;
+  box-shadow: 0 1px 6px rgb(0 0 0 / 50%), 0 1px 4px rgb(0 0 0 / 50%);
+  background-color: white;
 
 }
 
@@ -76,7 +78,6 @@ body{
 }
 
 .content-container{
-  border: 1px solid red;
   width: 80%;
   height: 100%;
   padding: 5px;
@@ -85,6 +86,9 @@ body{
   flex-direction: column;
   align-items: center;
   overflow-y: scroll;
+  box-shadow: 0 1px 6px rgb(0 0 0 / 50%), 0 1px 4px rgb(0 0 0 / 50%);
+  background-color: white;
+
 }
 
 .post-container{
@@ -93,7 +97,6 @@ body{
 }
 
 .post{
-  border: 1px solid black;
   display: flex;
   height: 20%;
   width: 100%;
@@ -101,6 +104,9 @@ body{
   justify-content: space-evenly;
   padding: 0 0 0 5px;
   margin: 5px;
+  box-shadow: 0 1px 6px rgb(0 0 0 / 50%), 0 1px 4px rgb(0 0 0 / 50%);
+  background-color: white;
+
 }
 
 .small-pic{
@@ -116,7 +122,7 @@ body{
   display: flex;
   flex-direction: column;
   align-items: flex-start;
-  text-align: center;
+  text-align: left;
 }
 
 .comments-button{
@@ -135,7 +141,6 @@ body{
 }
 
 .user{
-  border: 1px solid black;
   display: flex;
   height: 20%;
   width: 45%;
@@ -144,6 +149,8 @@ body{
   padding: 0 0 0 5px;
   margin: 5px;
   position: relative;
+  box-shadow: 0 1px 6px rgb(0 0 0 / 50%), 0 1px 4px rgb(0 0 0 / 50%);
+  background-color: white;
 }
 
 .connect-pic{
@@ -190,13 +197,14 @@ body{
 }
 
 .filter-event-job{
-  width: 80%;
   height: 10%;
-  border: 1px solid black;
+  width: 80%;
   margin: 5px;
   display: flex;
   align-items: center;
   justify-content: space-evenly;
+  padding:5px;
+
 }
 
 .event-job-list{
@@ -205,10 +213,11 @@ body{
   display: flex;
   flex-direction: column;
   align-items: center;
+  box-shadow: 0 1px 6px rgb(0 0 0 / 50%), 0 1px 4px rgb(0 0 0 / 50%);
+  background-color: white;
 }
 
 .event-job-container{
-  border: 1px solid black;
   width: 80%;
   margin: 5px;
   padding: 5px;
@@ -278,6 +287,32 @@ body{
   align-items: flex-end;
   justify-content: space-between;
   font-size: large;
+}
+.user-header{
+  display:flex;
+  width: 80%;
+  justify-content: space-between;
+ 
+}
+.user-title{
+  font-weight: bold;
+  font-size: 200%;
+  width: 20%;
+  padding: 5px;
+  margin: 5px;
+  box-shadow: 0 1px 6px rgb(0 0 0 / 50%), 0 1px 4px rgb(0 0 0 / 50%);
+  background-color: white;
+}
+.users-nav{
+  display: flex;
+  width: 80%;
+  align-items: center;
+  justify-content: space-evenly;
+  font-size: large;
+  padding: 5px;
+  margin: 5px;
+  box-shadow: 0 1px 6px rgb(0 0 0 / 50%), 0 1px 4px rgb(0 0 0 / 50%);
+  background-color: white;
 }
 
 .home-page{
@@ -377,17 +412,16 @@ a{
 }
 
 .convo-list{
-  border: 
-  1px solid black;
+
   width: 25%;
   height: 98%;
   display: flex;
   flex-direction: column;
   padding:5px;
+  box-shadow: 0 1px 6px rgb(0 0 0 / 50%), 0 1px 4px rgb(0 0 0 / 50%);
+  background-color: white;
 }
 .current-convo{
-  border: 
-  1px solid black;
   width: 65%;
   height: 98%;
   display: flex;
@@ -395,20 +429,37 @@ a{
   justify-content: space-between;
   align-items: center;
   padding:5px;
+  box-shadow: 0 1px 6px rgb(0 0 0 / 50%), 0 1px 4px rgb(0 0 0 / 50%);
+  background-color: white;
 }
 
 .messages{
   height:90%;
-  width:70%;
+  width:80%;
+  padding: 20px;
   overflow-y: scroll;
-  border: 1px solid orange;
+  border-radius: 10%;
+  box-shadow: 12px 12px 24px 0 rgba(0, 0, 0, 0.2),
+  -12px -12px 24px 0 rgba(255, 255, 255, 0.5),
+  inset 6px 6px 10px 0 rgba(0, 0, 0, 0.2),
+  inset -6px -6px 10px 0 rgba(255, 255, 255, 0.5);
+  background-image: linear-gradient(
+    white,
+    #f1f1f1 
+  );
 }
-/* .size{
-  height: 10%;
-  width: 100%;
-} */
+
 .respond{
   height:10%;
-  width:70%;
+  width:75%;
   position: sticky;
+  margin: 5px;
+}
+
+.sent{
+  text-align: right;
+}
+
+.recieved{
+  text-align: left;
 }

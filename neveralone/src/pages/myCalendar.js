@@ -12,7 +12,7 @@ const MyCalendar = (props) =>{
     const [savedJobs,setSavedJobs] = savedJobsState
 
     useEffect(()=>{setShouldRedirect('false')},[])
-    // useEffect(()=>{fetchSavedEvents()},[])
+    useEffect(()=>{fetchSavedEvents()},[])
 
 
 

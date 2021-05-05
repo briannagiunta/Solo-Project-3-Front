@@ -94,9 +94,17 @@ const Messages = (props) =>{
 
                         <div className = 'messages'>
                             {messages.map(mes=>
-                                <div>
-                                    {`${mes.user.name}: ${mes.content}`}
-                                </div>
+
+                               mes.user.email === user.email ? 
+                                    <div className = 'sent'>
+                                        {`${mes.user.name}: ${mes.content}`}
+                                    </div>
+                                    :
+                                    <div className = 'recieved'>
+                                        {`${mes.user.name}: ${mes.content}`}
+                                    </div>
+                                
+                               
                             )}
                         </div>
                     

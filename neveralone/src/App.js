@@ -35,9 +35,9 @@ function App() {
 
   useEffect(()=>{fetchUser()},[])
   useEffect(()=>{fetchAllUsers()},[])
-  useEffect(()=>{fetchByZip()},[])
-  useEffect(()=>{fetchSavedJobs()},[])
-  useEffect(()=>{fetchSavedEvents()},[])
+  // useEffect(()=>{fetchByZip()},[])
+  // useEffect(()=>{fetchSavedJobs()},[])
+  // useEffect(()=>{fetchSavedEvents()},[])
   useEffect(()=>{setShouldRedirect('false')},[])
   
   return (

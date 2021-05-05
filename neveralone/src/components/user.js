@@ -12,13 +12,17 @@ const User = (props) => {
 
 
     const checkForConvo = () =>{
-        hasConvoWith.forEach((convo)=>{
-            if(props.id === convo.user.id){
-                setLinkTo(`/messages`)
-            }else{
-                setLinkTo(`/startconvo/${props.id}`)
-            }
-        })
+        if(hasConvoWith.length > 0){
+            hasConvoWith.forEach((convo)=>{
+                if(props.id === convo.user.id){
+                    setLinkTo(`/messages`)
+                }else{
+                    setLinkTo(`/startconvo/${props.id}`)
+                }
+            })
+        }else{
+            setLinkTo(`/startconvo/${props.id}`)
+        }
     }
     useEffect(()=>{checkForConvo()},[])
     useEffect(()=>{setView(props.view)},[])
@@ -34,7 +38,7 @@ const User = (props) => {
                 Authorization: userId
             }
         })
-        console.log(res)
+        // console.log(res)
         if(res.data.message === 'request sent'){
             fetchPending()
         }
